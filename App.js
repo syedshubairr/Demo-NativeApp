@@ -1,6 +1,7 @@
 import { useState } from "react";
 import {
   Button,
+  FlatList,
   ScrollView,
   StyleSheet,
   Text,
@@ -31,13 +32,17 @@ export default function App() {
         <Button onPress={handleButton} title="Add Note" color="#000" />
       </View>
       <View style={style.listContainer}>
-        <ScrollView>
+        <FlatList
+          data={list}
+          renderItem={(item) => <Text style={style.showList}>{item.item}</Text>}
+        />
+        {/* <ScrollView>
           {list.map((item, index) => (
             <Text style={style.showList} key={index}>
               {item}
             </Text>
           ))}
-        </ScrollView>
+        </ScrollView> */}
       </View>
     </View>
   );
