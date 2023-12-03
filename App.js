@@ -1,5 +1,12 @@
 import { useState } from "react";
-import { Button, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  Button,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+} from "react-native";
 
 export default function App() {
   const [name, setName] = useState("");
@@ -10,14 +17,8 @@ export default function App() {
   };
 
   const handleButton = () => {
-    // console.log(name);
     setList((currentList) => [...currentList, name]);
   };
-
-  const handleClear = () => {
-    setList([]);
-  };
-  console.log(list);
 
   return (
     <View style={style.main}>
@@ -30,12 +31,13 @@ export default function App() {
         <Button onPress={handleButton} title="Add Note" color="#000" />
       </View>
       <View style={style.listContainer}>
-        <Button onPress={handleClear} title="Clear List" color="#AAA" />
-      </View>
-      <View style={style.listContainer}>
-        {list.map((item, index) => (
-          <Text key={index}>{item}</Text>
-        ))}
+        <ScrollView>
+          {list.map((item, index) => (
+            <Text style={style.showList} key={index}>
+              {item}
+            </Text>
+          ))}
+        </ScrollView>
       </View>
     </View>
   );
@@ -44,11 +46,16 @@ export default function App() {
 const style = StyleSheet.create({
   main: {
     padding: 60,
+    paddingHorizontal: 15,
+    flex: 1,
   },
   container: {
+    display: "flex",
+    padding: 20,
     flexDirection: "row",
-    paddingBottom: 30,
     borderBottomWidth: 1,
+    alignItems: "center",
+    justifyContent: "space-between",
   },
   input: {
     borderWidth: 1,
@@ -57,5 +64,13 @@ const style = StyleSheet.create({
   },
   listContainer: {
     padding: 20,
+    flex: 1,
+  },
+  showList: {
+    fontSize: 20,
+    borderWidth: 2,
+    borderRadius: 25,
+    padding: 20,
+    marginBottom: 10,
   },
 });
